@@ -62,8 +62,8 @@ if (isset($_POST['login'])) {
                                                 <input class="form-control py-4" name="password" id="inputPassword" type="password" placeholder="Enter password" autofocus />
                                             </div>
                                             <button class="btn btn-primary" name="login">Login</button>
+                                        </form>
                                     </div>
-                                    </form>
                                 </div>
                                 <div class="card-footer text-center">
                                 </div>

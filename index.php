@@ -56,6 +56,129 @@ if (!isset($_SESSION['level'])) {
                         <h1>Selamat Datang <?= $_SESSION['level'] ?>!</h1>
                         <p>Semangat kerjanya dan semoga harimu menyenangkan :) </p>
                     </div>
+                    <div class="row mt-4">
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="h5 mb-2 text-gray-800 text-primary"> Jumlah Stock</div>
+                                            <a href="stock.php" style="color: black;">
+                                                <div class="h5 mb-0  text-gray-800"></div>
+                                                <?php
+                                                // Query SQL untuk menjumlahkan kolom 'jumlah' dari tabel 'stock'
+                                                $sql = "SELECT SUM(stock) as total_jumlah FROM stock";
+                                                $result = $conn->query($sql);
+                                                if ($result->num_rows > 0) {
+                                                    // Output data dari setiap baris hasil query
+                                                    while ($row = $result->fetch_assoc()) {
+                                                        echo '<div class="h5 mb-0 text-gray-800">' . $row["total_jumlah"] . '</div>';
+                                                    }
+                                                } else {
+                                                    echo "Tidak ada data di tabel stock.";
+                                                } ?>
+                                            </a>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-cubes fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <a href="masuk.php" style="color: black; text-decoration: none;">
+                                <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="h5 mb-2  text-gray-800 text-success"> Barang Masuk</div>
+
+                                                <div class="h5 mb-0  text-gray-800"></div>
+                                                <?php
+                                                // Query SQL untuk menjumlahkan kolom 'jumlah' dari tabel 'stock'
+                                                $sql = "SELECT SUM(qty) as total_jumlah FROM masuk";
+                                                $result = $conn->query($sql);
+                                                if ($result->num_rows > 0) {
+                                                    // Output data dari setiap baris hasil query
+                                                    while ($row = $result->fetch_assoc()) {
+                                                        echo '<div class="h5 mb-0 text-gray-800">' . $row["total_jumlah"] . '</div>';
+                                                    }
+                                                } else {
+                                                    echo "Tidak ada data di tabel stock.";
+                                                } ?>
+
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-cubes fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="h5 mb-2  text-gray-800 text-danger"> Barang Keluar</div>
+                                            <a href="keluar.php" style="color: black;">
+                                                <div class="h5 mb-0  text-gray-800"></div>
+                                                <?php
+                                                // Query SQL untuk menjumlahkan kolom 'jumlah' dari tabel 'stock'
+                                                $sql = "SELECT SUM(qty) as total_jumlah FROM keluar";
+                                                $result = $conn->query($sql);
+                                                if ($result->num_rows > 0) {
+                                                    // Output data dari setiap baris hasil query
+                                                    while ($row = $result->fetch_assoc()) {
+                                                        echo '<div class="h5 mb-0 text-gray-800">' . $row["total_jumlah"] . '</div>';
+                                                    }
+                                                } else {
+                                                    echo "Tidak ada data di tabel stock.";
+                                                } ?>
+                                            </a>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-cubes fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2" style="color: black;">
+                                            <div class="h5 mb-2  text-gray-800 text-warning"> Pengguna</div>
+                                            <a href="keluser.php" style="color: black;">
+                                                <div class="h5 mb-0  text-gray-800"></div>
+                                                <?php
+                                                // Query SQL untuk menjumlahkan kolom 'level' dari tabel 'user'
+                                                $sql = "SELECT COUNT(*) as total_users FROM login";
+                                                $result = $conn->query($sql);
+
+                                                if ($result->num_rows > 0) {
+                                                    // Output data dari setiap baris hasil query
+                                                    while ($row = $result->fetch_assoc()) {
+                                                        echo '<div class="h5 mb-0 text-gray-800">' . $row["total_users"] . '</div>';
+                                                    }
+                                                } else {
+                                                    echo "Tidak ada data di tabel user.";
+                                                }
+                                                ?>
+
+                                            </a>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-cubes fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </main>
             <footer class="py-4 bg-light mt-auto">
@@ -67,6 +190,7 @@ if (!isset($_SESSION['level'])) {
             </footer>
         </div>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>

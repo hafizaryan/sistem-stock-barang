@@ -17,18 +17,18 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Kelola Barang Keluar
             </a>
-            <a class="nav-link" href="PO.php">
+            <!-- <a class="nav-link" href="PO.php">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Purchase Order
-            </a>
+            </a> -->
             <?php if ($_SESSION['level'] == 'Admin') : ?>
                 <a class="nav-link" href="keluser.php">
-                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                     Kelola User
                 </a>
             <?php endif; ?>
             <a class="nav-link" href="logout.php">
-                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>
                 Logout
             </a>
 

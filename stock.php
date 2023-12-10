@@ -136,20 +136,23 @@ if (!isset($_SESSION['level'])) {
                                                         <!-- Modal body -->
                                                         <form method="post" enctype="multipart/form-data">
                                                             <div class="modal-body">
-                                                                <label for="file">Gambar</label>
-                                                                <input type="file" name="file" class="form-control">
+                                                                <div>
+                                                                    <img src="img/<?= $data['image']; ?>" alt="" width="90px">
+                                                                </div><br>
+                                                                <input type="hidden" name="gambarlama" value="<?= $data["image"]; ?>">
+                                                                <input type="file" name="file" value="img/<?= $data['image']; ?>" class="form-control">
                                                                 <br>
                                                                 <input type="text" name="namabarang" value="<?= $namabarang; ?>" class="form-control" required>
                                                                 <br>
                                                                 <input type="number" name="stock" placeholder="Stock" value="<?= $stock; ?>" class="form-control" required>
                                                                 <br>
                                                                 <label for="kadaluwarsa">Tanggal Kadaluwarsa</label>
-                                                                <input type="date" name="kadaluwarsa" placeholder="Tanggal Kadaluwarsa" value="<?= $kadaluwarsa; ?>" class="form-control " required>
+                                                                <input type="date" name="kadaluwarsa" placeholder="Tanggal Kadaluwarsa" value="<?= $kadaluwarsa; ?>" class="form-control" required>
                                                                 <br>
                                                                 <input type="text" name="keterangan" value="<?= $keterangan; ?>" class="form-control" required>
                                                                 <br>
                                                                 <input type="hidden" name="idbarang" value="<?= $idb; ?>">
-                                                                <button type="submit" class="btn btn-primary" name="updatebarang">submit</button>
+                                                                <button type="submit" class="btn btn-primary" name="updatebarang">Submit</button>
                                                             </div>
                                                         </form>
                                                     </div>

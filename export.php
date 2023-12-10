@@ -1,29 +1,32 @@
 <?php
 require 'function.php';
+
 if (!isset($_SESSION['level'])) {
     // Redirect to the login page if the user is not logged in
     header('Location: login.php');
     exit(); // add exit after header to stop execution
 }
 ?>
+
 <html>
 
 <head>
     <title>Stock Barang</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 </head>
 
 <body>
     <div class="container">
         <h2>Laporan Stock Barang</h2>
         <h4>(Laporan)</h4>
+
+        <!-- Tombol Generate PDF -->
+        <form action="cetak.php" method="post" target="_blank">
+            <button type="submit" class="btn btn-secondary" style="margin-left:70px; position: absolute; z-index: 999; margin-top: 8px;">Cetak</button>
+        </form>
+
         <div class="data-tables datatable-dark">
             <?php
             $ambilsemuadatastock = mysqli_query($conn, "select * from stock");
@@ -57,17 +60,6 @@ if (!isset($_SESSION['level'])) {
         </div>
     </div>
 
-    <script>
-        $(document).ready(function() {
-            $('#mauexport').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'excel', 'pdf', 'print'
-                ]
-            });
-        });
-    </script>
-
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
@@ -78,8 +70,16 @@ if (!isset($_SESSION['level'])) {
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
 
-
-
+    <script>
+        $(document).ready(function() {
+            $('#mauexport').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'excel',
+                ]
+            });
+        });
+    </script>
 </body>
 
 </html>

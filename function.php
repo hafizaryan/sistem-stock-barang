@@ -85,33 +85,47 @@ if (isset($_POST['addbarangkeluar'])) {
     }
 }
 
-//update info barang
+// update barang
 if (isset($_POST['updatebarang'])) {
     $idb = $_POST['idbarang'];
     $namabarang = $_POST['namabarang'];
     $stock = $_POST['stock'];
-    $image = $_POST['image'];
     $kadaluwarsa = $_POST['kadaluwarsa'];
     $keterangan = $_POST['keterangan'];
-    //soal gambar
-    $allowed_extension = array('png', 'jpg');
-    $nama = $_FILES['file']['name']; //ngambil gambar
-    $dot = explode('.', $nama);
-    $ekstensi = strtolower(end($dot));
-    $ukuran = $_FILES['file']['size'];
-    $file_tmp = $_FILES['file']['tmp_name'];
-    //penamaaan enkripsi
-    $image = md5(uniqid($nama, true) . time()) . '.' . $ekstensi;
-    if (in_array($ekstensi, $allowed_extension) === true) {
-        if ($ukuran < 15000000) {
-            move_uploaded_file($file_tmp, 'img/' . $image);
+
+    // Get the old image name
+    $gambarlama = htmlspecialchars($_POST["gambarlama"]);
+
+    // Check if a new image is selected
+    if ($_FILES['file']['error'] === 4) {
+        $image = $gambarlama; // Use the old image name
+    } else {
+        // Handle image upload
+        $allowed_extensions = array('png', 'jpg');
+        $nama = $_FILES['file']['name'];
+        $dot = explode('.', $nama);
+        $ekstensi = strtolower(end($dot));
+
+        if (in_array($ekstensi, $allowed_extensions) && $_FILES['file']['size'] < 15000000) {
+            // Generate a unique name for the image
+            $image = md5(uniqid($nama, true) . time()) . '.' . $ekstensi;
+
+            // Move the uploaded file to the destination directory
+            move_uploaded_file($_FILES['file']['tmp_name'], 'img/' . $image);
+        } else {
+            // Handle invalid file type or size
+            echo 'Invalid file type or size.';
+            exit;
         }
     }
-    $update = mysqli_query($conn, "update stock set namabarang='$namabarang', stock='$stock', image='$image', kadaluwarsa='$kadaluwarsa', keterangan='$keterangan' where idbarang='$idb'");
+
+    // Update the database
+    $update = mysqli_query($conn, "UPDATE stock SET namabarang='$namabarang', stock='$stock', image='$image', kadaluwarsa='$kadaluwarsa', keterangan='$keterangan' WHERE idbarang='$idb'");
+
     if ($update) {
         header('location: stock.php');
     } else {
-        echo 'Masih Gagal';
+        echo 'Failed to update.';
         header('location: stock.php');
     }
 }
