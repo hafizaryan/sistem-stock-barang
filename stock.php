@@ -144,7 +144,14 @@ if (!isset($_SESSION['level'])) {
                                                                 <br>
                                                                 <input type="text" name="namabarang" value="<?= $namabarang; ?>" class="form-control" required>
                                                                 <br>
-                                                                <input type="number" name="stock" placeholder="Stock" value="<?= $stock; ?>" class="form-control" required>
+                                                                <input type="number" name="stock" id="stockInput" placeholder="Stock" value="<?= $stock; ?>" class="form-control" required oninput="limitLength(this, 5)">
+                                                                <script>
+                                                                    function limitLength(element, maxLength) {
+                                                                        if (element.value.length > maxLength) {
+                                                                            element.value = element.value.slice(0, maxLength);
+                                                                        }
+                                                                    }
+                                                                </script>
                                                                 <br>
                                                                 <label for="kadaluwarsa">Tanggal Kadaluwarsa</label>
                                                                 <input type="date" name="kadaluwarsa" placeholder="Tanggal Kadaluwarsa" value="<?= $kadaluwarsa; ?>" class="form-control" required>
@@ -208,6 +215,17 @@ if (!isset($_SESSION['level'])) {
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="assets/demo/datatables-demo.js"></script>
+    <script>
+        // Mendapatkan elemen input
+        var stockInput = document.getElementById("stockInput");
+
+        // Menambahkan event listener untuk mengontrol panjang maksimum
+        stockInput.addEventListener("input", function() {
+            if (stockInput.value.length > 5) {
+                stockInput.value = stockInput.value.slice(0, 5);
+            }
+        });
+    </script>
 </body>
 
 <!-- The Modal -->
@@ -230,7 +248,7 @@ if (!isset($_SESSION['level'])) {
                     <br>
                     <input type="text" name="keterangan" placeholder="keterangan" class="form-control" required>
                     <br>
-                    <input type="number" name="stock" placeholder="Stock" class="form-control" required>
+                    <input type="number" name="stock" id="stockInput" placeholder="Stock" class="form-control" required>
                     <br>
                     <label for="kadaluwarsa">Tanggal Kadaluwarsa</label>
                     <input type="date" name="kadaluwarsa" placeholder="Tanggal Kadaluwarsa" class="form-control " required>
